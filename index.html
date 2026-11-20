@@ -370,7 +370,11 @@ img{display:block;max-width:100%}
       <canvas id="foil" aria-label="Gold scratch card hiding the date"></canvas>
     </div>
     <p class="hint rv" id="hint">Scratch the gold to reveal the date</p>
-    <button class="skip rv" id="skip" type="button">or tap here to reveal</button>
+    <button class="skip rv" id="skip" type="button" style="margin-bottom:34px">or tap here to reveal</button>
+    <a href="#journey" class="cue" aria-label="Scroll down to the journey">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+    </a>
   </section>
 
   <!-- 3 · The journey -->
@@ -380,11 +384,15 @@ img{display:block;max-width:100%}
     <p class="caps rv" style="margin-top:60px">The Journey</p>
     <h2 class="h2 rv" style="margin-top:6px">A Lifetime of Love</h2>
     <div class="orn rv" style="margin-top:10px"><svg viewBox="0 0 92 24"><use href="#leaf"/></svg></div>
-    <ul class="timeline">
+    <ul class="timeline" style="margin-bottom:36px">
       <li class="rv"><b>12 December <span id="y2">1977</span></b><p>Two hearts set out on one path.</p></li>
       <li class="rv"><b>Through the years</b><p>A home built on patience, laughter and love.</p></li>
       <li class="rv"><b>12 December 2026</b><p>Stepping into the golden fiftieth year, with a family that grew around it.</p></li>
     </ul>
+    <a href="#details" class="cue" aria-label="Scroll down to celebration details">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+    </a>
   </section>
 
   <!-- 4 · The celebration -->
@@ -415,10 +423,14 @@ img{display:block;max-width:100%}
       <iframe title="Map of The Grandeur Boutique Hotel, Borivali West" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
         src="https://www.google.com/maps?q=The+Grandeur+Boutique+Hotel,+Link+Rd,+Yogi+Nagar,+Borivali+West,+Mumbai+400091&output=embed"></iframe>
     </div>
-    <div class="btns rv" style="margin-bottom:120px">
+    <div class="btns rv" style="margin-bottom:60px">
       <a class="btn fill" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=The+Grandeur+Boutique+Hotel%2C+Link+Rd%2C+Yogi+Nagar%2C+Borivali+West%2C+Mumbai+400091">Open Map</a>
       <a class="btn" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Kaushika+%26+Arvind+%E2%80%93+50th+Wedding+Anniversary&dates=20261212T123000Z/20261212T163000Z&location=The+Grandeur+Boutique+Hotel%2C+Link+Rd%2C+Yogi+Nagar%2C+Borivali+West%2C+Mumbai+400091&details=Golden+Jubilee+celebration.+6+PM+onwards.">Add to Calendar</a>
     </div>
+    <a href="#close" class="cue" aria-label="Scroll down to closing message">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+    </a>
   </section>
 
   <!-- 5 · Closing -->
@@ -554,6 +566,20 @@ img{display:block;max-width:100%}
   }
   env.addEventListener('click', openEnv);
   env.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openEnv(); } });
+
+  /* ---- smooth scroll buttons ---- */
+  document.querySelectorAll('a.cue').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      var href = btn.getAttribute('href');
+      if (href && href.charAt(0) === '#'){
+        var target = $(href);
+        if (target){
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
 
   /* ---- golden thread bead, rose parallax & scroll effects ---- */
   var bead = $('#bead'), lastScrollY = 0, scrollTicking = false;
