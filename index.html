@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Arvind &amp; Kaushika · Golden Jubilee</title>
-<meta name="description" content="You are invited to celebrate the 50th Wedding Anniversary of Arvind &amp; Kaushika. Scratch the gold card to reveal the date.">
-<meta property="og:title" content="Arvind &amp; Kaushika · 50th Wedding Anniversary">
+<title>Kaushika &amp; Arvind · Golden Jubilee</title>
+<meta name="description" content="You are invited to celebrate the 50th Wedding Anniversary of Kaushika &amp; Arvind. Scratch the gold card to reveal the date.">
+<meta property="og:title" content="Kaushika &amp; Arvind · 50th Wedding Anniversary">
 <meta property="og:description" content="Together forever for fifty years. Open the invitation and scratch the gold card to reveal the date.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#F9E8D7">
@@ -75,14 +75,7 @@ img{display:block;max-width:100%}
 /* ---------- type ---------- */
 .caps{font-size:13px;letter-spacing:.4em;text-transform:uppercase;font-weight:600;color:var(--gold-deep);padding-left:.4em}
 .caps.wine{color:var(--wine);font-size:15px;letter-spacing:.44em;font-weight:500}
-.names{font-family:var(--script);font-weight:400;color:var(--wine);font-size:clamp(40px,12.4vw,54px);line-height:1.15;white-space:nowrap;word-spacing:.14em;
-  background:linear-gradient(120deg,#6E1428 0%,#98263E 22%,#D9A441 50%,#98263E 78%,#6E1428 100%);
-  background-size:250% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  animation:goldSheen 8s ease-in-out infinite;text-shadow:0 2px 14px rgba(184,137,43,.15)}
-@keyframes goldSheen{
-  0%,100%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-}
+.names{font-family:var(--script);font-weight:400;color:var(--wine);font-size:clamp(40px,12.4vw,54px);line-height:1.15;white-space:nowrap;word-spacing:.14em}
 .h2{font-family:var(--script);font-weight:400;color:var(--wine);font-size:clamp(38px,11.4vw,48px);line-height:1.15}
 .lead{font-size:20px;line-height:1.5;max-width:316px;color:var(--ink)}
 .quote{font-style:italic;font-size:19px;line-height:1.5;max-width:312px;color:var(--wine)}
@@ -110,9 +103,14 @@ img{display:block;max-width:100%}
   0%{filter:drop-shadow(0 10px 22px rgba(184,137,43,.22))}
   100%{filter:drop-shadow(0 16px 32px rgba(226,190,106,.42))}
 }
-.cue{position:absolute!important;bottom:26px;left:0;right:0;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-deep)}
-.cue span{display:block;width:1px;height:24px;margin:7px auto 0;background:linear-gradient(var(--gold),transparent);animation:drip 2.2s ease-in-out infinite;transform-origin:top}
-@keyframes drip{0%,100%{transform:scaleY(.35);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+.cue{position:absolute!important;bottom:26px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:6px 18px;border-radius:999px;background:rgba(255,250,242,.96);border:1.2px solid rgba(184,137,43,.7);
+  box-shadow:0 6px 18px rgba(74,13,27,.18);font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;font-weight:700;
+  color:#380512;text-decoration:none;cursor:pointer;white-space:nowrap;z-index:10;
+  transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+.cue:hover{transform:translateX(-50%) translateY(-2px);background:#fff;box-shadow:0 8px 22px rgba(74,13,27,.26)}
+.cue svg{width:13px;height:13px;stroke:#380512;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;animation:bounceDown 1.8s ease-in-out infinite}
+@keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
 
 /* ---------- page 2 ---------- */
 .scratch{position:relative;width:min(100%,292px);height:132px;margin:14px auto 0;border-radius:12px;
@@ -176,7 +174,7 @@ img{display:block;max-width:100%}
 .count.done{display:block;font-style:italic;color:var(--wine)}
 .btns{display:flex;gap:10px;width:100%;max-width:320px;margin:18px auto 0}
 .btn{flex:1;display:inline-block;padding:13px 6px;border-radius:999px;font:600 12.5px/1 var(--serif);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
-  border:1.2px solid var(--gold);color:var(--wine);background:rgba(255,250,242,.8);
+  border:1px solid var(--gold);color:var(--wine);background:rgba(255,250,242,.7);
   box-shadow:0 4px 14px rgba(110,20,40,.08);position:relative;overflow:hidden;
   transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s ease,background .25s ease}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(110,20,40,.16)}
@@ -193,10 +191,7 @@ img{display:block;max-width:100%}
 #close{padding-top:150px;padding-bottom:150px}
 .hosts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 6px;width:100%;max-width:320px;margin:12px auto 0;font-size:20px;line-height:1.3;color:var(--ink)}
 .hosts span{white-space:nowrap}
-.sign{font-family:var(--script);font-size:clamp(32px,9.6vw,40px);line-height:1.2;color:var(--wine);margin-top:4px;white-space:nowrap;
-  background:linear-gradient(120deg,#6E1428 0%,#98263E 22%,#D9A441 50%,#98263E 78%,#6E1428 100%);
-  background-size:250% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  animation:goldSheen 8s ease-in-out infinite}
+.sign{font-family:var(--script);font-size:clamp(32px,9.6vw,40px);line-height:1.2;color:var(--wine);margin-top:4px;white-space:nowrap}
 .nogift{position:relative;z-index:25!important;width:100%;max-width:312px;margin:22px auto 4px;padding:18px 18px 16px;border-radius:16px;color:#F6E2B4;
   background:linear-gradient(180deg,var(--wine),var(--wine-deep));border:1.2px solid var(--gold-light);
   box-shadow:0 0 0 4px rgba(249,232,215,.9),0 0 0 6px rgba(184,137,43,.75),0 18px 36px rgba(74,13,27,.35);
@@ -204,8 +199,6 @@ img{display:block;max-width:100%}
 .nogift:hover{transform:translateY(-2px) scale(1.015);
   box-shadow:0 0 0 4px rgba(249,232,215,.95),0 0 0 7px rgba(226,190,106,.85),0 22px 44px rgba(74,13,27,.45)}
 .nogift svg{display:block;width:26px;height:26px;margin:0 auto 6px;fill:none;stroke:var(--gold-light);stroke-width:1.5;stroke-linejoin:round;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3))}
-.nogift .ng1{font-size:15.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#F3D488;padding-left:.13em;line-height:1.3;white-space:nowrap}
-.nogift .ng2{font-style:italic;font-size:19px;line-height:1.35;margin-top:6px}
 .nogift .ng1{font-size:15.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#F3D488;padding-left:.13em;line-height:1.3;white-space:nowrap}
 .nogift .ng2{font-style:italic;font-size:19px;line-height:1.35;margin-top:6px}
 
@@ -297,11 +290,11 @@ img{display:block;max-width:100%}
 <canvas id="petals" aria-hidden="true"></canvas>
 <div class="thread" aria-hidden="true"><i id="bead"></i></div>
 
-<audio id="bgm" loop preload="auto">
+<audio id="bgm" loop preload="auto" autoplay>
   <source src="assets/music.mp3" type="audio/mpeg">
 </audio>
 
-<button id="music-btn" class="music-btn" type="button" aria-label="Toggle background music" title="Toggle background music">
+<button id="music-btn" class="music-btn playing" type="button" aria-label="Pause background music" title="Pause music">
   <svg class="icon-muted" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/>
     <line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -319,7 +312,7 @@ img{display:block;max-width:100%}
   </svg>
   <img class="rose tl" src="assets/roses-tl.webp" alt="" width="520" height="560">
   <img class="rose br" src="assets/roses-br.webp" alt="" width="464" height="356">
-  <div class="env-top"><p class="caps" style="font-size:11.5px">You are invited</p><p class="n">Arvind &amp; Kaushika</p></div>
+  <div class="env-top"><p class="caps" style="font-size:13px">You are invited</p><p class="n">Kaushika &amp; Arvind</p></div>
   <div class="seal"><b>50</b><span>Tap to open</span></div>
   <p class="env-hint caps" style="font-size:11px">Golden Jubilee</p>
 </div>
@@ -330,7 +323,7 @@ img{display:block;max-width:100%}
     <g fill="#C39A3A">
       <path d="M46 2c3.200 4.200 3.200 9.800 0 14-3.200-4.200-3.200-9.800 0-14z"/>
       <path d="M43 17c-4.800-.6-8.600-3.400-10.400-7.800 4.800.2 8.800 3 10.400 7.800z"/>
-      <path d="M49 17c4.800-.6 8.600-3.400 10.400-7.800-4.800.2-8.800 3-10.400 7.800z"/>
+      <path d="M49 17c4.800-.6 8.600-3.400 10.400-7.800-4.800.2-8.800 3 10.400 7.800z"/>
       <path d="M40 19.500c-6 2.200-12.400 1-17-3 6.200-1.800 12.600-.8 17 3z"/>
       <path d="M52 19.500c6 2.200 12.400 1 17-3-6.200-1.800-12.600-.8-17 3z"/>
       <circle cx="16" cy="17.500" r="2.300"/><circle cx="76" cy="17.500" r="2.300"/>
@@ -350,10 +343,13 @@ img{display:block;max-width:100%}
     </p>
     <div class="fifty rv"><img src="assets/fifty.webp" alt="50th" width="540" height="320"></div>
     <p class="caps wine rv">Wedding Anniversary</p>
-    <h1 class="names rv" style="margin-top:18px">Arvind &amp; Kaushika</h1>
+    <h1 class="names rv" style="margin-top:18px">Kaushika &amp; Arvind</h1>
     <div class="orn rv"><svg viewBox="0 0 92 24"><use href="#leaf"/></svg></div>
     <p class="caps rv">Golden Jubilee · Mumbai</p>
-    <p class="cue">Scroll<span></span></p>
+    <a href="#invite" class="cue rv" aria-label="Scroll down to invitation">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+    </a>
   </section>
 
   <!-- 2 · Invitation + scratch -->
@@ -361,7 +357,7 @@ img{display:block;max-width:100%}
     <img class="rose tr" src="assets/roses-tl.webp" alt="" width="520" height="560" loading="lazy">
     <img class="rose bl" src="assets/roses-br.webp" alt="" width="464" height="356" loading="lazy">
     <p class="lead rv" style="margin-top:70px">You are cordially invited to celebrate the 50<sup style="font-size:.6em">th</sup> Wedding Anniversary of</p>
-    <h2 class="names rv" style="margin-top:8px">Arvind &amp; Kaushika</h2>
+    <h2 class="names rv" style="margin-top:8px">Kaushika &amp; Arvind</h2>
     <div class="orn rv"><svg viewBox="0 0 92 24"><use href="#leaf"/></svg></div>
     <p class="quote rv">Fifty years of love, companionship and togetherness – a journey that continues to inspire us all.</p>
     <p class="caps rv" style="margin-top:26px">Save the Date</p>
@@ -383,9 +379,7 @@ img{display:block;max-width:100%}
     <img class="rose br sm" src="assets/roses-br.webp" alt="" width="464" height="356" loading="lazy">
     <p class="caps rv" style="margin-top:60px">The Journey</p>
     <h2 class="h2 rv" style="margin-top:6px">A Lifetime of Love</h2>
-    <p class="years rv" style="margin-top:6px"><span id="y1">1977</span>
-      <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10h30m-7-6 7 6-7 6" fill="none" stroke="#B8892B" stroke-width="1.400" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span>2026</span></p>
+    <div class="orn rv" style="margin-top:10px"><svg viewBox="0 0 92 24"><use href="#leaf"/></svg></div>
     <ul class="timeline">
       <li class="rv"><b>12 December <span id="y2">1977</span></b><p>Two hearts set out on one path.</p></li>
       <li class="rv"><b>Through the years</b><p>A home built on patience, laughter and love.</p></li>
@@ -423,7 +417,7 @@ img{display:block;max-width:100%}
     </div>
     <div class="btns rv" style="margin-bottom:120px">
       <a class="btn fill" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=The+Grandeur+Boutique+Hotel%2C+Link+Rd%2C+Yogi+Nagar%2C+Borivali+West%2C+Mumbai+400091">Open Map</a>
-      <a class="btn" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Arvind+%26+Kaushika+%E2%80%93+50th+Wedding+Anniversary&dates=20261212T123000Z/20261212T163000Z&location=The+Grandeur+Boutique+Hotel%2C+Link+Rd%2C+Yogi+Nagar%2C+Borivali+West%2C+Mumbai+400091&details=Golden+Jubilee+celebration.+6+PM+onwards.">Add to Calendar</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Kaushika+%26+Arvind+%E2%80%93+50th+Wedding+Anniversary&dates=20261212T123000Z/20261212T163000Z&location=The+Grandeur+Boutique+Hotel%2C+Link+Rd%2C+Yogi+Nagar%2C+Borivali+West%2C+Mumbai+400091&details=Golden+Jubilee+celebration.+6+PM+onwards.">Add to Calendar</a>
     </div>
   </section>
 
@@ -455,7 +449,8 @@ img{display:block;max-width:100%}
   var root = document.documentElement; root.classList.add('js');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function(s){ return document.querySelector(s); };
-  $('#y1').textContent = WEDDING_YEAR; $('#y2').textContent = WEDDING_YEAR;
+  if ($('#y1')) $('#y1').textContent = WEDDING_YEAR;
+  if ($('#y2')) $('#y2').textContent = WEDDING_YEAR;
 
   /* ---- line-by-line reveal ---- */
   var pages = document.querySelectorAll('.page');
@@ -470,7 +465,7 @@ img{display:block;max-width:100%}
   /* ---- background music & autoplay ---- */
   var bgm = $('#bgm'), musicBtn = $('#music-btn');
   var TARGET_VOL = 0.65;
-  var isPlaying = false;
+  var isPlaying = true;
   var userMuted = false;
   var fadeTimer = null;
 
@@ -502,15 +497,28 @@ img{display:block;max-width:100%}
   }
 
   function playBgm(){
-    if (!bgm || isPlaying || userMuted) return;
+    if (!bgm || userMuted) return;
+    setMusicState(true);
     var p = bgm.play();
     if (p !== undefined){
       p.then(function(){
-        setMusicState(true);
-        fadeInAudio(TARGET_VOL, 1600);
+        fadeInAudio(TARGET_VOL, 1400);
       }).catch(function(){
-        // Browser autoplay restriction; will resume on first touch/click
-        setMusicState(false);
+        // Browser autoplay restriction on unmuted audio without gesture.
+        // Listen to the very first user interaction anywhere to immediately start audio
+        function unlockAudio(){
+          if (!userMuted && bgm.paused){
+            bgm.play().then(function(){
+              fadeInAudio(TARGET_VOL, 1200);
+            }).catch(function(){});
+          }
+          ['pointerdown','touchstart','keydown','click','scroll'].forEach(function(ev){
+            window.removeEventListener(ev, unlockAudio, true);
+          });
+        }
+        ['pointerdown','touchstart','keydown','click','scroll'].forEach(function(ev){
+          window.addEventListener(ev, unlockAudio, true);
+        });
       });
     }
   }
@@ -518,37 +526,20 @@ img{display:block;max-width:100%}
   function toggleMusic(e){
     if (e) e.stopPropagation();
     if (!bgm) return;
-    if (isPlaying && !bgm.paused){
+    if (!bgm.paused){
       userMuted = true;
       bgm.pause();
       setMusicState(false);
     } else {
       userMuted = false;
-      var p = bgm.play();
-      if (p !== undefined){
-        p.then(function(){
-          setMusicState(true);
-          fadeInAudio(TARGET_VOL, 1000);
-        }).catch(function(){});
-      }
+      playBgm();
     }
   }
 
   if (musicBtn) musicBtn.addEventListener('click', toggleMusic);
 
-  // Attempt autoplay immediately as page loads
+  // Play immediately as soon as the website loads!
   playBgm();
-
-  // If autoplay was blocked by browser policy, start on first interaction anywhere
-  function onFirstGesture(){
-    if (!userMuted && !isPlaying) playBgm();
-    window.removeEventListener('pointerdown', onFirstGesture, true);
-    window.removeEventListener('keydown', onFirstGesture, true);
-    window.removeEventListener('touchstart', onFirstGesture, true);
-  }
-  window.addEventListener('pointerdown', onFirstGesture, true);
-  window.addEventListener('keydown', onFirstGesture, true);
-  window.addEventListener('touchstart', onFirstGesture, true);
 
   /* ---- envelope ---- */
   var env = $('#env'), opened = false;
