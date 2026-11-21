@@ -495,7 +495,7 @@ img{display:block;max-width:100%}
 
   /* ---- background music & autoplay ---- */
   var bgm = $('#bgm'), musicBtn = $('#music-btn');
-  var TARGET_VOL = 0.65;
+  var TARGET_VOL = 0.95;
   var isPlaying = true;
   var userMuted = false;
   var fadeTimer = null;
@@ -532,32 +532,28 @@ img{display:block;max-width:100%}
     if (!bgm || userMuted) return;
     setMusicState(true);
     if (!bgm.paused){
-      if (bgm.volume < TARGET_VOL) fadeInAudio(TARGET_VOL, 1000);
+      if (bgm.volume < TARGET_VOL) fadeInAudio(TARGET_VOL, 400);
       return;
     }
     var p = bgm.play();
     if (p !== undefined){
       p.then(function(){
-        fadeInAudio(TARGET_VOL, 1400);
-      }).catch(function(){
-        // Browser autoplay restriction on unmuted audio without gesture.
-        // Listen to the very first user interaction anywhere to immediately start audio
-        function unlockAudio(){
-          if (!userMuted && bgm.paused){
-            bgm.play().then(function(){
-              fadeInAudio(TARGET_VOL, 1200);
-            }).catch(function(){});
-          }
-          ['pointerdown','touchstart','keydown','click','scroll'].forEach(function(ev){
-            window.removeEventListener(ev, unlockAudio, true);
-          });
-        }
-        ['pointerdown','touchstart','keydown','click','scroll'].forEach(function(ev){
-          window.addEventListener(ev, unlockAudio, true);
-        });
-      });
+        fadeInAudio(TARGET_VOL, 400);
+      }).catch(function(){});
     }
   }
+
+  function unlockAudio(){
+    if (!userMuted && bgm && bgm.paused){
+      playBgm();
+    }
+    ['pointerdown','touchstart','keydown','click','scroll'].forEach(function(ev){
+      window.removeEventListener(ev, unlockAudio, true);
+    });
+  }
+  ['pointerdown','touchstart','keydown','click','scroll'].forEach(function(ev){
+    window.addEventListener(ev, unlockAudio, true);
+  });
 
   function toggleMusic(e){
     if (e) e.stopPropagation();
