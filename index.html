@@ -517,11 +517,12 @@ img{display:block;max-width:100%}
   function fadeInAudio(target, ms){
     if (!bgm) return;
     if (fadeTimer) cancelAnimationFrame(fadeTimer);
-    bgm.volume = 0;
+    if (bgm.volume >= target * 0.9) return;
+    var startVol = bgm.volume;
     var t0 = performance.now();
     function step(now){
       var p = Math.min(1, (now - t0) / ms);
-      bgm.volume = p * target;
+      bgm.volume = startVol + p * (target - startVol);
       if (p < 1 && !bgm.paused) fadeTimer = requestAnimationFrame(step);
     }
     fadeTimer = requestAnimationFrame(step);
@@ -530,6 +531,10 @@ img{display:block;max-width:100%}
   function playBgm(){
     if (!bgm || userMuted) return;
     setMusicState(true);
+    if (!bgm.paused){
+      if (bgm.volume < TARGET_VOL) fadeInAudio(TARGET_VOL, 1000);
+      return;
+    }
     var p = bgm.play();
     if (p !== undefined){
       p.then(function(){
@@ -577,7 +582,7 @@ img{display:block;max-width:100%}
   root.classList.add('locked'); window.scrollTo(0,0);
   function openEnv(){
     if (opened) return; opened = true;
-    if (!userMuted) playBgm();
+    if (!userMuted && bgm && bgm.paused) playBgm();
     env.classList.add('open'); root.classList.remove('locked');
     setTimeout(startReveal, 450);
     setTimeout(function(){ var b = colBounds(); shower({left:b[0], top:H*.35, width:b[1], height:H*.3}); }, 250);
