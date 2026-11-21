@@ -157,8 +157,8 @@ img{display:block;max-width:100%}
 .timeline p{font-size:20px;line-height:1.4;margin-top:3px;color:var(--wine)}
 
 /* ---------- page 4 ---------- */
-#details{padding-bottom:170px}
-#details .cue{bottom:82px}
+#details{padding-bottom:50px}
+#details .cue{position:relative!important;bottom:auto!important;left:auto!important;right:auto!important;margin:16px auto 0!important}
 .facts{width:100%;margin-top:20px;display:grid;gap:14px}
 .fact{background:rgba(255,250,242,.68);border:1px solid rgba(184,137,43,.32);border-radius:14px;padding:14px 16px;
   box-shadow:0 8px 24px rgba(110,20,40,.06),inset 0 1px 0 rgba(255,255,255,.8);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
@@ -305,11 +305,11 @@ img{display:block;max-width:100%}
 <canvas id="petals" aria-hidden="true"></canvas>
 <div class="thread" aria-hidden="true"><i id="bead"></i></div>
 
-<audio id="bgm" loop preload="auto" autoplay>
+<audio id="bgm" loop preload="auto" autoplay playsinline webkit-playsinline>
   <source src="assets/music.mp3" type="audio/mpeg">
 </audio>
 
-<button id="music-btn" class="music-btn playing" type="button" aria-label="Pause background music" title="Pause music">
+<button id="music-btn" class="music-btn" type="button" aria-label="Play background music" title="Play music">
   <svg class="icon-muted" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/>
     <line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -438,7 +438,7 @@ img{display:block;max-width:100%}
       <iframe title="Map of The Grandeur Boutique Hotel, Borivali West" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
         src="https://www.google.com/maps?q=The+Grandeur+Boutique+Hotel,+Link+Rd,+Yogi+Nagar,+Borivali+West,+Mumbai+400091&output=embed"></iframe>
     </div>
-    <div class="btns rv" style="margin-bottom:24px">
+    <div class="btns rv" style="margin-bottom:0">
       <a class="btn fill" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=The+Grandeur+Boutique+Hotel%2C+Link+Rd%2C+Yogi+Nagar%2C+Borivali+West%2C+Mumbai+400091">Open Map</a>
       <a class="btn" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Kaushika+%26+Arvind+%E2%80%93+50th+Wedding+Anniversary&dates=20261212T123000Z/20261212T163000Z&location=The+Grandeur+Boutique+Hotel%2C+Link+Rd%2C+Yogi+Nagar%2C+Borivali+West%2C+Mumbai+400091&details=Golden+Jubilee+celebration.+6+PM+onwards.">Add to Calendar</a>
     </div>
@@ -497,13 +497,9 @@ img{display:block;max-width:100%}
 
   /* ---- background music & autoplay ---- */
   var bgm = $('#bgm'), musicBtn = $('#music-btn');
-  var TARGET_VOL = 0.95;
-  var isPlaying = true;
   var userMuted = false;
-  var fadeTimer = null;
 
   function setMusicState(playing){
-    isPlaying = playing;
     if (!musicBtn) return;
     if (playing){
       musicBtn.classList.add('playing');
@@ -516,45 +512,36 @@ img{display:block;max-width:100%}
     }
   }
 
-  function fadeInAudio(target, ms){
-    if (!bgm) return;
-    if (fadeTimer) cancelAnimationFrame(fadeTimer);
-    if (bgm.volume >= target * 0.9) return;
-    var startVol = bgm.volume;
-    var t0 = performance.now();
-    function step(now){
-      var p = Math.min(1, (now - t0) / ms);
-      bgm.volume = startVol + p * (target - startVol);
-      if (p < 1 && !bgm.paused) fadeTimer = requestAnimationFrame(step);
-    }
-    fadeTimer = requestAnimationFrame(step);
-  }
-
   function playBgm(){
     if (!bgm || userMuted) return;
-    setMusicState(true);
-    if (!bgm.paused){
-      if (bgm.volume < TARGET_VOL) fadeInAudio(TARGET_VOL, 400);
-      return;
-    }
+    try { bgm.muted = false; } catch(e){}
+    try { bgm.volume = 1.0; } catch(e){}
     var p = bgm.play();
     if (p !== undefined){
       p.then(function(){
-        fadeInAudio(TARGET_VOL, 400);
-      }).catch(function(){});
+        setMusicState(true);
+        cleanupAudioUnlock();
+      }).catch(function(){
+        setMusicState(false);
+      });
     }
   }
 
-  function unlockAudio(){
+  var touchEvents = ['touchstart', 'touchend', 'pointerdown', 'pointerup', 'mousedown', 'click'];
+  function onGestureUnlock(){
     if (!userMuted && bgm && bgm.paused){
       playBgm();
     }
-    ['pointerdown','touchstart','keydown','click','scroll'].forEach(function(ev){
-      window.removeEventListener(ev, unlockAudio, true);
+  }
+  function cleanupAudioUnlock(){
+    touchEvents.forEach(function(ev){
+      window.removeEventListener(ev, onGestureUnlock, true);
+      document.removeEventListener(ev, onGestureUnlock, true);
     });
   }
-  ['pointerdown','touchstart','keydown','click','scroll'].forEach(function(ev){
-    window.addEventListener(ev, unlockAudio, true);
+  touchEvents.forEach(function(ev){
+    window.addEventListener(ev, onGestureUnlock, true);
+    document.addEventListener(ev, onGestureUnlock, true);
   });
 
   function toggleMusic(e){
@@ -572,22 +559,44 @@ img{display:block;max-width:100%}
 
   if (musicBtn) musicBtn.addEventListener('click', toggleMusic);
 
-  // Play immediately as soon as the website loads!
+  // Prime and play immediately (works on laptop and friendly mobile browsers)
+  try { bgm.load(); } catch(e){}
   playBgm();
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', playBgm);
+  }
+  window.addEventListener('load', playBgm);
 
   /* ---- envelope ---- */
   var env = $('#env'), opened = false;
-  root.classList.add('locked'); window.scrollTo(0,0);
+  root.classList.add('locked');
+  try { window.scrollTo(0,0); } catch(e){}
+
   function openEnv(){
-    if (opened) return; opened = true;
-    if (!userMuted && bgm && bgm.paused) playBgm();
-    env.classList.add('open'); root.classList.remove('locked');
+    playBgm();
+    if (opened) return;
+    opened = true;
+    env.classList.add('open');
+    root.classList.remove('locked');
     setTimeout(startReveal, 450);
     setTimeout(function(){ var b = colBounds(); shower({left:b[0], top:H*.35, width:b[1], height:H*.3}); }, 250);
-    setTimeout(function(){ if (env.parentNode) env.parentNode.removeChild(env); }, 1500);
+    setTimeout(function(){ if (env && env.parentNode) env.parentNode.removeChild(env); }, 1500);
   }
-  env.addEventListener('click', openEnv);
-  env.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openEnv(); } });
+
+  if (env){
+    // Immediate audio activation on touchstart / pointerdown so user gesture is synchronously active
+    env.addEventListener('pointerdown', function(){ playBgm(); }, {passive: true});
+    env.addEventListener('touchstart', function(){ playBgm(); }, {passive: true});
+    env.addEventListener('touchend', function(e){ playBgm(); openEnv(); }, {passive: true});
+    env.addEventListener('click', function(e){ playBgm(); openEnv(); });
+    env.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        playBgm();
+        openEnv();
+      }
+    });
+  }
 
   /* ---- smooth scroll buttons ---- */
   document.querySelectorAll('a.cue').forEach(function(btn){
